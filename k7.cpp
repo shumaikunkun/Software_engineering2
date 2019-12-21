@@ -8,8 +8,8 @@ protected:
 public:
   person(){};
   void setName(string n){name = n;};
-  virtual void requestData(){};
-  virtual void showData(){};
+  virtual void requestData()=0;
+  virtual void showData()=0;
 };
 
 class par_node{
@@ -41,7 +41,7 @@ public:
     cin >> grade;
   };
   void showData(){
-    cout << " " << name << "(会員) 会員番号:" << memberid << " 学年:" << grade << "\n";
+    cout << " " << name << "(学生会員) 会員番号:" << memberid << " / 学年:" << grade << "\n";
   };
 };
 
@@ -56,7 +56,7 @@ public:
     cin >> phone;
   };
   void showData(){
-    cout << " " << name << "(非会員) " << email << " / " << phone << "\n";
+    cout << " " << name << "(非会員) メアド:" << email << " / 電話番号:" << phone << "\n";
   };
 };
 
