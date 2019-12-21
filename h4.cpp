@@ -3,13 +3,13 @@
 using namespace std;
 
 class bookshelf{
+  string top;
+  string middle;
+  string bottom;
 public:
   bookshelf(){top=""; middle=""; bottom="";};
   string& getShelf (string destination);
   void showShelves();
-  string top;
-  string middle;
-  string bottom;
 };
 
 string& bookshelf::getShelf (string destination){
