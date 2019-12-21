@@ -1,3 +1,4 @@
+//ポリモーフィズムの実装
 #include <iostream>
 using namespace std;
 
@@ -17,19 +18,34 @@ public:
   par_node* next;
 };
 
-class member : public person{
+class member : public person{  //子クラス１
+protected:
   int memberid;
 public:
-  void requestData(){
+  virtual void requestData(){
     cout << " 会員番号を入力してください。\n ";
     cin >> memberid;
   };
-  void showData(){
+  virtual void showData(){
     cout << " " << name << "(会員) 会員番号:" << memberid << "\n";
   };
 };
 
-class nonmember : public person {
+class smember : public member{  //孫クラス１−１
+  int grade;
+public:
+  void requestData(){
+    cout << " 会員番号を入力してください。\n ";
+    cin >> memberid;
+    cout << " 学年を入力してください。\n ";
+    cin >> grade;
+  };
+  void showData(){
+    cout << " " << name << "(会員) 会員番号:" << memberid << " 学年:" << grade << "\n";
+  };
+};
+
+class nonmember : public person {  //子クラス２
   string email;
   string phone;
 public:
@@ -47,21 +63,28 @@ public:
 int main()
 {
   int i = 0;
-  string name, mtype;
+  string name, mtype, stype;
   par_node* p = new par_node;
   par_node* q = p;
-  
+
   while(1){
-    cout << "名前を入力してください。（終了する場合䛿 quit と入力してください）\n";
+    cout << "名前を入力してください。（終了する場合、 quit と入力してください）\n";
     cin >> name;
     if(name == "quit"){break;}
     cout << " 会員ですか？(y/n) \n ";
     cin >> mtype;
     if(mtype == "y"){
-      q->participant = new member;
+      cout << " 学生ですか？(y/n) \n ";
+      cin >> stype;
+      if(stype == "y"){
+        q->participant = new smember;
+      }else{
+        q->participant = new member;
+      }
     }else{
       q->participant = new nonmember;
     }
+
     q->participant->setName(name);
     q->participant->requestData();
     q->next = new par_node;
@@ -70,7 +93,7 @@ int main()
   }
 
   cout << "\n 参加者一覧：\n";
-  q = p;
+  q = p;  //ポインタを最初に戻す
   while(i > 0){
     q->participant->showData();
     q = q->next;
