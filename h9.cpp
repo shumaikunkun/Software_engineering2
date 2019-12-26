@@ -4,39 +4,22 @@
 #include <sstream>
 using namespace std;
 
-string to_str(int num){
-  stringstream ss;
-  ss << num;
-  return ss.str();
-}
-
-class vec3d {
+class case_ins : public string{
 public:
-  int d1, d2, d3;
-  vec3d(int i1, int i2, int i3){d1 = i1; d2 = i2; d3 = i3;};
-  vec3d(){};
-  string show(){return "(" + to_str(d1) + "," + to_str(d2) + "," + to_str(d3) + ")";};
+  case_ins(const char *str) : string(str) {}
 };
-// operator overload for +
-vec3d operator+(vec3d u, vec3d v){
-  vec3d w;
-  w.d1 = u.d1 + v.d1;
-  w.d2 = u.d2 + v.d2;
-  w.d3 = u.d3 + v.d3;
-  return w;
+
+bool operator==(case_ins a, case_ins b){
+  if(a.size()!=b.size()){return false;}
+  for(int i=0; i<a.size(); i++){if(a[i]-b[i]!=0 && a[i]-b[i]!=-32 && a[i]-b[i]!=32){return false;}}
+  return true;
 }
 
-bool operator==(vec3d u, vec3d v){
-  return u.d1 == v.d1 && u.d2 == v.d2 & u.d3 == v.d3 ? true : false;
-}
+int main(){
+  case_ins c="aaa";
+  case_ins arr[]={"aaa","AAA","bbb","12345","x"};
 
-int main()
-{
-  vec3d a(2,3,5), b(7,5,1), c(7,5,1);
-  cout << "a = " << a.show() << "\n";
-  cout << "b = " << b.show() << "\n";
-  cout << "c = " << c.show() << "\n";
-  cout << "a+b = " << (a+b).show() << "\n";
-  cout << "a==b = " << (a==b ? "true" : "false") << "\n";
-  cout << "b==c = " << (b==c ? "true" : "false") << "\n";
+  for(int i=0; i<sizeof(arr)/sizeof(arr[0]); i++){
+    cout << c << " and " << arr[i] << " is " << (c==arr[i]?"true":"false") << endl;
+  }
 }
