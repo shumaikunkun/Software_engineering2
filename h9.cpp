@@ -18,8 +18,5 @@ bool operator==(case_ins a, case_ins b){
 int main(){
   case_ins c="aaa";
   case_ins arr[]={"aaa","AAA","bbb","12345","x"};
-
-  for(int i=0; i<sizeof(arr)/sizeof(arr[0]); i++){
-    cout << c << " and " << arr[i] << " is " << (c==arr[i]?"true":"false") << endl;
-  }
+  for(int i=0; i<sizeof(arr)/sizeof(arr[0]); i++){cout << c << " and " << arr[i] << " is " << (c==arr[i]?"true":"false") << endl;}
 }
