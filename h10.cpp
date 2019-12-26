@@ -27,27 +27,3 @@ int main(){
   cout << "forChar.max() = " << forChar.max() << endl;
   cout << "forBool.max() = " << (forBool.max()?"true":"false") << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-// template <class X> X max(X &a){
-//
-// }
-//
-// int main(){
-//   int arr1[10]={1,2,3,4,5};
-//   char arr2[10]="abcde";
-//   bool arr3[10]={true,false,true,false,true};
-//
-//   cout << (2<1 ? "true":"false");
-//   cout << ('a'<'b' ? "true":"false");
-//   cout << (false<true ? "true":"false");
-// }
