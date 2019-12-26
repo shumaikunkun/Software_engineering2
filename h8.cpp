@@ -1,42 +1,28 @@
 #include <iostream>
 using namespace std;
 
-class ex_account{
+class ex_account_too_long{
 public:
   string account;
-};
-
-class ex_account_too_long : public ex_account{
-public:
-  ex_account_too_long(string str){ account = str; };
-  string show(){ return "アカウント '" + account + "' は長すぎます。"; };
-};
-
-class ex_account_too_short : public ex_account{
-public:
-  ex_account_too_short(string str) { account = str; };
-  string show(){ return "アカウント '" + account + "' は短すぎます。\n"; };
+  ex_account_too_long(string str){account = str;};
+  string show(){ return "アカウント '" + account + (account.length()>6 ? "' は長すぎます。" : "' は短すぎます。"); };
 };
 
 int main(){
   string account;
-  int accountshortlim = 3;
   int accountlenlim = 6;
-  cout << "希望アカウントを入力してください（英数字３文字以上６文字以内）: ";
+  int accountshortlim = 3;
+  cout << "希望アカウントを入力してください（英数字3文字以内6文字以内）: ";
   cin >> account;
+  
   try{
-    if(account.length() > accountlenlim){
+    if(account.length() > accountlenlim || account.length() < accountshortlim){
       ex_account_too_long ex2long(account);
       throw ex2long;
-    }else if(account.length() < accountshortlim){
-      ex_account_too_short ex2short(account);
-      throw ex2short;
     }else{
       cout << "\n" << account << "さん、ようこそ！\n\n";
     }
   }catch(ex_account_too_long e){
-    cout << "\nException: " << e.show() << "\n\n";
-  }catch(ex_account_too_short e){
     cout << "\nException: " << e.show() << "\n\n";
   }
 }
